@@ -67,10 +67,19 @@ public class Deck {
         top = DEFAULT_DECK_CAPACITY-1;
     }
 
+    /**
+     * Returns the array of Cards for this Deck.
+     * @return the array of Cards for this Deck.
+     */
     public Card[] getDeck() {
         return deck;
     }
 
+
+    /**
+     * Space Complexity: O(1)
+     * Time Complexity O(n) where N is the size of the deck (currently limited to 52)
+     */
     public void shuffle() {
         int i, swapWith;
         for (i=0; i < 52; i++) {
@@ -80,6 +89,14 @@ public class Deck {
         }
     }
 
+
+    /**
+     * Swaps the locations of the two Cards found at deck[index] and deck[swapWith] respectively.
+     * Space Complexity: O(1)
+     * Time Complexity: O(1)
+     * @param index the index of the first Card to swap.
+     * @param swapWith the index of the second Card to swap.
+     */
     void swapCards(int index, int swapWith) {
         Card temp = deck[index];
         deck[index] = deck[swapWith];
@@ -92,7 +109,7 @@ public class Deck {
      * @return Returns the top Card in this.deck;
      */
     public Card dealOneCard() {
-        if (top == -1) return null;
+        if (top < 0) return null;
         Card cardToReturn = deck[top]; // Temporarily store the Card which will be returned.
         deck[top] = null; // Remove the top card from the deck.
         top--; //  Tell the array where its new top is

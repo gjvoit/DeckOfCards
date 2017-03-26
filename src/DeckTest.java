@@ -1,7 +1,4 @@
 import org.junit.Test;
-
-import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 /**
@@ -15,14 +12,14 @@ public class DeckTest {
                 "Ace of Hearts", testDeck.getDeck()[0].toString());
         assertEquals("Deck constructed improperly, 12th card should be King of Hearts",
                 "King of Hearts", testDeck.getDeck()[12].toString());
-        assertEquals("Deck constructed improperly, 13th card should be Ace of Spades",
-                "Ace of Spades", testDeck.getDeck()[13].toString());
-        assertEquals("Deck constructed improperly, 25th card should be Ace of Spades",
-                "King of Spades", testDeck.getDeck()[25].toString());
-        assertEquals("Deck constructed improperly, 26th card should be Ace of Diamonds",
-                "Ace of Diamonds",testDeck.getDeck()[26].toString());
-        assertEquals("Deck constructed improperly, 38th card should be King of Diamonds",
-                "King of Diamonds", testDeck.getDeck()[38].toString());
+        assertEquals("Deck constructed improperly, 14th card should be Two of Spades",
+                "Two of Spades", testDeck.getDeck()[14].toString());
+        assertEquals("Deck constructed improperly, 25th card should be Jack of Spades",
+                "Jack of Spades", testDeck.getDeck()[23].toString());
+        assertEquals("Deck constructed improperly, 33rd card should be Eight of Diamonds",
+                "Eight of Diamonds",testDeck.getDeck()[33].toString());
+        assertEquals("Deck constructed improperly, 37th card should be Queen of Diamonds",
+                "Queen of Diamonds", testDeck.getDeck()[37].toString());
         assertEquals("Deck constructed improperly, 39th card should be Ace of Clubs",
                 "Ace of Clubs", testDeck.getDeck()[39].toString());
         assertEquals("Deck constructed improperly, last card should be King of Clubs",
@@ -36,6 +33,8 @@ public class DeckTest {
             testDeck.dealOneCard().toString();
         }
         assertNull("When we reach the bottom of the deck, we should return null", testDeck.dealOneCard());
+        assertNull("When we reach the bottom of the deck, we should return null", testDeck.dealOneCard());
+        assertNull("When we reach the bottom of the deck, we should return null", testDeck.dealOneCard());
     }
     @Test
     public void testSwap() {
@@ -47,5 +46,8 @@ public class DeckTest {
     @Test
     public void testShuffle() {
         Deck testDeck = new Deck();
+        testDeck.shuffle();
+        for (int i=0; i < 52; i++) testDeck.dealOneCard();
+        assertNull("When we reach the bottom of the deck, we should return null", testDeck.dealOneCard());
     }
 }
