@@ -83,9 +83,18 @@ public class Deck {
     public void shuffle() {
         int i, swapWith;
         for (i=0; i < 52; i++) {
-            // Generate a random number each time
-            swapWith = ThreadLocalRandom.current().nextInt(0, 52);
-            swapCards(i, swapWith);
+            // It's possible that some (or all) cards would be unmoved if the random number generates the index that
+            // i is pointing to. To avoid this, in the general case, we can swap deck[i] with deck[0], then generate
+            // the random number in the range 1, 52. This necessitates a single case (when i==0) which needs to be
+            // handled, otherwise 0 would never be swapped. To avoid this, we simply swap it to deck[51], then randomly
+            // generate a number in the range 0, 51 (where 51 is exclusive).
+            if (i == 0) {
+                swapWith = ThreadLocalRandom.current().nextInt(0, 51);
+                swapCards(51, swapWith);
+            }
+            else swapCards(i, 0);
+            swapWith = ThreadLocalRandom.current().nextInt(1, 52);
+            swapCards(0, swapWith);
         }
     }
 
